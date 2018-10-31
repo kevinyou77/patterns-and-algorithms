@@ -9,9 +9,10 @@
       "baseUrl": "./src"
   },
   "include": [
-      "src/**/*.ts"
+      "src/**/*.ts", "src/data-structures/binary-search-tree.ts"
   ],
   "exclude": [
-      "node_modules"
+    "typings",
+    "node_modules"
   ]
 }

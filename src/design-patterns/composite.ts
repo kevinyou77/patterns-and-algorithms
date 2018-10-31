@@ -1,3 +1,8 @@
+/*
+  *Not really pure composite
+  *This is actually one of the quiz given by my lecturer
+*/
+
 class Employee {
   protected name: string;
   protected parent: Employee;
@@ -56,9 +61,6 @@ class Developer extends Employee {
       throw new Error("You cannot add staffs because ur lead is a dev")
     }
 
-    console.log(e);
-    console.log(e.getParent());
-    
     e.setParent(this);
     this.staffList.push(e);
   }
@@ -77,7 +79,6 @@ class CompositeMain {
     let man: Manager = new Manager("Kevin Manager");
     let dev2: Developer = new Developer("Dev2");
     let dev3: Developer = new Developer("Dev3");
-    
     
     man.add(dev);
     man.add(dev1);

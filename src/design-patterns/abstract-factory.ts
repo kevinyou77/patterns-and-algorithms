@@ -48,7 +48,7 @@ class Swordsman implements Job {
   }
 
   pickWeapon(): void {
-    const factory: WeaponFactory = FactoryProducer.getFactory("weapon");  
+    const factory: WeaponFactory = AbstractFactory.getFactory("weapon");  
     const leftWeapon: Weapon = factory.getWeapon("sword");
     const rightWeapon: Weapon = factory.getWeapon("shield");
     this.weaponList.push(leftWeapon);
@@ -66,7 +66,7 @@ class Mage implements Job {
   protected weaponList: Weapon[];
 
   pickWeapon(): void {
-    const factory: WeaponFactory = FactoryProducer.getFactory("weapon");
+    const factory: WeaponFactory = AbstractFactory.getFactory("weapon");
     const leftWeapon: Weapon = factory.getWeapon("wand");
 
     this.weaponList.push(leftWeapon);
@@ -93,6 +93,21 @@ class Cleric implements Job {
 }
 
 abstract class AbstractFactory {
+  public static getFactory(type: string): AbstractFactory {
+    let factory: AbstractFactory = null;
+    switch(type) {
+      case 'weapon':
+        factory = new WeaponFactory();
+        break;
+
+      case 'job':
+        factory = new JobFactory(); 
+        break;
+    }
+
+    return factory;
+  }
+
   public abstract getWeapon(weapon: string): Weapon;
   public abstract getJob(job: string): Job;
 }
@@ -139,26 +154,9 @@ class JobFactory extends AbstractFactory {
   }
 }
 
-class FactoryProducer {
-  public static getFactory(type: string): AbstractFactory {
-    let factory: AbstractFactory = null;
-    switch(type) {
-      case 'weapon':
-        factory = new WeaponFactory();
-        break;
-
-      case 'job':
-        factory = new JobFactory(); 
-        break;
-    }
-
-    return factory;
-  }
-}
-
 class Main {
   constructor() {
-    let jobFactory: AbstractFactory = FactoryProducer.getFactory("job");
+    let jobFactory: AbstractFactory = AbstractFactory.getFactory("job");
     let swordsman: Job = jobFactory.getJob("swordsman");
     swordsman.printWeapons();
   }
