@@ -85,6 +85,49 @@ class BinarySearchTree {
     }
   }
 
+  public bfs(): any[] {
+    let node = this.root;
+    let queue = [];
+    let visited = [];
+    queue.push(node);
+
+    while(queue.length) {
+      node = queue.shift();
+      visited.push(node.value);
+
+      if (node.left !== null) queue.push(node.left);
+      if (node.right !== null) queue.push(node.right);
+    }
+
+    return visited;
+  }
+
+  public dfsPostOrder(): any[] {
+    let data = [];
+
+    function traverse(node) {
+      node.left !== null && traverse(node.left);
+      node.right !== null && traverse(node.right); 
+      data.push(node.value);
+    }
+
+    traverse(this.root);
+    return data;
+  }
+
+  public dfsInOrder(): any[] {
+    let data = [];
+
+    function traverse(node) {
+      node.left !== null && traverse(node.left);
+      data.push(node.value);
+      node.right !== null && traverse(node.right);
+    }
+
+    traverse(this.root);
+    return data;
+  }
+
   public get root(): TreeNode {
     return this._root;
   }
@@ -103,45 +146,4 @@ bst.insert(60);
 bst.insert(80);
 bst.insert(150);
 
-console.log(bst);
-
-  // public delete(value: number): BinarySearchTree {
-  //   let exists = this.search(value);
-
-  //   if (exists === -1) {
-  //     return;
-  //   }
-
-  //   let current = this.root;
-  //   let parent = null;
-  //   let found = null;
-
-  //   while(true) {
-  //     if (current.left.value === value) {
-  //       parent = current;
-  //       found = current.left;
-  //     } else if (current.right.value === value) {
-  //       parent = current;
-  //       found = current.right;
-  //     }
-
-  //     if (found.left !== null) {
-  //       found = found.left;
-  //       found.left = null;
-  //     }
-
-  //     if (found.right !== null) {
-  //       found = found.right;
-  //       found.right = null;
-  //     }
-
-  //     if (found.right !== null && found.left !== null) {
-  //       found = 
-  //     }
-
-  //     if (value < current.value) {
-  //       current = current.left;
-  //     } else {
-  //       current = current.right;
-  //     }
-  //   }
+console.log(bst); 

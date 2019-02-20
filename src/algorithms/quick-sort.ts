@@ -28,3 +28,6 @@ function mergeSort(arr: any[], left = 0, right = arr.length) {
 
   return arr;
 }
+
+console.log(mergeSort([5,8,4,6,2,6,0,23,21,55,20,22]));
+console.log(mergeSort(['z','b','a','x','c','f']));

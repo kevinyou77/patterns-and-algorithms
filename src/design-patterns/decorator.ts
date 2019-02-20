@@ -3,7 +3,7 @@ interface ICostume {
 }
 
 class GhostEnemy {
-  costume: ICostume;
+  private costume: ICostume;
 
   constructor(costume: ICostume) {
     this.costume = costume;
@@ -11,8 +11,26 @@ class GhostEnemy {
 }
 
 class Costume implements ICostume {
+  protected _costumeName?: string;
+
+  constructor(costume: Costume = {} as Costume) {
+    let { 
+      costumeName = ""
+    } = costume;
+
+    this.costumeName = costumeName;
+  }
+
   public getCostumeInfo() {
-    return "Costume: ";
+    return this.costumeName + " ";
+  }
+
+  public get costumeName(): string {
+    return this._costumeName;
+  }
+
+  public set costumeName(name: string) {
+    this._costumeName = name;
   }
 }
 
